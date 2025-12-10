@@ -1,0 +1,13 @@
+# Kubernetes Secrets
+mysql-secret.yaml
+*.secret.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# Käyttöjärjestelmä/Editori
+.DS_Store
+.vscode/

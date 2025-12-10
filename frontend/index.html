@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>LEMP on Kubernetes</title>
+
+    <!-- Makes relative paths work under /kube/ -->
+    <base href="/kube/">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 40px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+        h1 {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            white-space: pre-wrap;
+            background: #eee;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            min-height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>LEMP Stack on Kubernetes</h1>
+        <p style="text-align:center;">Frontend: Nginx • Backend: Flask • Database: MySQL</p>
+
+        <div style="text-align:center;">
+            <button onclick="health()">Check Health</button>
+            <button onclick="initDB()">Init DB</button>
+            <button onclick="getUsers()">Get Users</button>
+        </div>
+
+        <pre id="result">Waiting for action...</pre>
+    </div>
+
+<script>
+async function api(path) {
+    const res = await fetch(path);
+    return res.text();
+}
+
+async function health() {
+    document.getElementById('result').textContent = await api('api/health');
+}
+async function initDB() {
+    document.getElementById('result').textContent = await api('api/init-db');
+}
+async function getUsers() {
+    document.getElementById('result').textContent = await api('api/users');
+}
+</script>
+</body>
+</html>
